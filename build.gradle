@@ -1,6 +1,8 @@
 plugins {
-    id 'com.xpgaming.xppokedex' version '0.1'
+    id 'org.spongepowered.plugin' version '0.8.1'
 }
+
+apply plugin: "java"
 
 group = 'com.xpgaming'
 version = '0.1'
@@ -13,7 +15,15 @@ repositories {
         url = 'https://repo.spongepowered.org/maven'
     }
 }
-
 dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
     compile 'org.spongepowered:spongeapi:5.1.0'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
 }

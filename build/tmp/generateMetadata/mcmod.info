@@ -1,0 +1,15 @@
+[
+    {
+        "modid": "xppokedex",
+        "name": "xP// PokeDex",
+        "version": "0.1",
+        "description": "Fun things with the PokéDex!",
+        "requiredMods": [
+            "spongeapi@5.1.0",
+            "pixelmon"
+        ],
+        "dependencies": [
+            "pixelmon"
+        ]
+    }
+]
