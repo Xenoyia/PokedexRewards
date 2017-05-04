@@ -1,0 +1,19 @@
+plugins {
+    id 'com.xpgaming.xppokedex' version '0.1'
+}
+
+group = 'com.xpgaming'
+version = '0.1'
+description = 'Fun things with the PokéDex!'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven'
+    }
+}
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:5.1.0'
+}
