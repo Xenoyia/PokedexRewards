@@ -29,11 +29,20 @@ public class Remaining implements CommandExecutor {
             if(optstorage.isPresent()) {
                 List<Text> contents = new ArrayList<>();
                 for(EnumPokemon e : EnumPokemon.values()) {
+                    if(e.toString().contentEquals("PorygonZ")) {
+                        String name = "Porygon-Z";
+                        int id = Pokedex.nameToID(name);
+                        contents.add(Text.of("\u00A76"+name));
+                    } else if(e.toString().contentEquals("Hooh")) {
+                        String name = "Ho-Oh";
+                        int id = Pokedex.nameToID(name);
+                        contents.add(Text.of("\u00A7e"+name));
+                    }
                     int id = Pokedex.nameToID(e.toString());
                     if(!optstorage.get().pokedex.hasCaught(id)) {
                         if(EnumPokemon.legendaries.contains(e.toString())) {
-                            contents.add(Text.of("\u00A76"+e.toString()));
-                        } else contents.add(Text.of("\u00A7e"+e.toString()));
+                            contents.add(Text.of("\u00A7e"+e.toString()));
+                        } else contents.add(Text.of("\u00A76"+e.toString()));
                     }
                 }
                 PaginationList.builder()
