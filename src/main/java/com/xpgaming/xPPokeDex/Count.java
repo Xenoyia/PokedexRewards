@@ -27,7 +27,7 @@ public class Count implements CommandExecutor {
                 double percent = (double) caught / (double) EnumPokemon.values().length * 100.00;
                 DecimalFormat df = new DecimalFormat();
                 df.setMaximumFractionDigits(2);
-                player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have caught \u00A7f"+caught+"\u00A7b/\u00A7f"+Pokedex.pokedexSize+" \u00A7bPokemon! (\u00A7f"+df.format(percent)+"%\u00A7b)"));
+                player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have caught \u00A7f"+caught+"\u00A7b/\u00A7f"+EnumPokemon.values().length+" \u00A7bPokemon! (\u00A7f"+df.format(percent)+"%\u00A7b)"));
             }
 
         } else {
