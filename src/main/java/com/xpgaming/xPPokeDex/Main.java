@@ -16,7 +16,7 @@ import org.spongepowered.api.text.Text;
 
 import java.io.File;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.1", dependencies = {@Dependency(id = "pixelmon")})
+@Plugin(id = Main.id, name = Main.name, version = "0.2", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
     public static final String id = "xppokedex";
     public static final String name = "xP// PokeDex";
@@ -40,9 +40,17 @@ public class Main {
             .executor(new Count())
             .build();
 
+    CommandSpec reload = CommandSpec.builder()
+            .description(Text.of("Reload the config!"))
+            .permission("xpgaming.pokedex.reload")
+            .executor(new Reload())
+            .build();
+
     CommandSpec pokedex = CommandSpec.builder()
             .description(Text.of("PokéDex things!"))
             .permission("xpgaming.pokedex")
+            .child(claim, "cl", "claim")
+            .child(reload, "rl", "reload")
             .child(count, "c", "count", "co")
             .child(remaining, "r", "remaining", "remain", "rem")
             .executor(new PokedexBase())
@@ -59,7 +67,7 @@ public class Main {
     @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
-        log.info("Loaded v0.1!");
+        log.info("Loaded v0.2!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
     }
 }

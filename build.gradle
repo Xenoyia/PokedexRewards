@@ -5,7 +5,7 @@ plugins {
 apply plugin: "java"
 
 group = 'com.xpgaming'
-version = '0.1'
+version = '0.2'
 description = 'Fun things with the PokéDex!'
 
 repositories {

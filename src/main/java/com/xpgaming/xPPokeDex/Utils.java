@@ -1,5 +1,9 @@
 package com.xpgaming.xPPokeDex;
 
+import com.pixelmonmod.pixelmon.enums.EnumPokemon;
+import com.pixelmonmod.pixelmon.storage.PixelmonStorage;
+import com.pixelmonmod.pixelmon.storage.PlayerStorage;
+import net.minecraft.entity.player.EntityPlayerMP;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
@@ -12,7 +16,13 @@ import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.type.GridInventory;
 import org.spongepowered.api.world.World;
 
+import java.util.Optional;
+
 public class Utils {
+    private static Utils instance = new Utils();
+    public static Utils getInstance() {
+        return instance;
+    }
 
     public void giveItemStack(ItemStack i, Player player) {
         if(player.getInventory().query(Hotbar.class, GridInventory.class).size() < 36)
@@ -29,5 +39,19 @@ public class Utils {
             world.spawnEntity(it, Cause.source(spawnCause).build());
         }
 
+    }
+
+    public double calcPercent(EntityPlayerMP entity) {
+        Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(entity);
+        if(optstorage.isPresent()) {
+            int caught = ((PlayerStorage) optstorage.get()).pokedex.countCaught();
+            double percent = (double) caught / (double) EnumPokemon.values().length * 100.00;
+            return percent;
+        }
+        return 0.0;
+    }
+
+    public boolean hasClaimed(Player p, String pct) {
+        return Config.getInstance().getConfig().getNode("playerData", p.getUniqueId().toString(), pct).getBoolean();
     }
 }
