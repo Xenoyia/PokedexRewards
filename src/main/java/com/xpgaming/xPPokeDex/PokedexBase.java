@@ -23,7 +23,7 @@ public class PokedexBase implements CommandExecutor {
                 player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex claim\u00A7f|\u00A7bcl \u00A77- Claim rewards every 10%!"));
             }
             if(player.hasPermission("xpgaming.pokedex.reload")) {
-                player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex reload\u00A7f|\u00A7rl \u00A77- Reload config!"));
+                player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex reload\u00A7f|\u00A7brl \u00A77- Reload config!"));
             }
         } else {
             src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7b\u00A7l-- COMMANDS --"));
