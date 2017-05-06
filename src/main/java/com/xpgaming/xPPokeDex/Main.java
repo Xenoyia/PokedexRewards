@@ -6,21 +6,57 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
+import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongepowered.api.service.economy.EconomyService;
+import org.spongepowered.api.service.economy.account.UniqueAccount;
+import org.spongepowered.api.service.economy.transaction.ResultType;
+import org.spongepowered.api.service.economy.transaction.TransactionResult;
 import org.spongepowered.api.text.Text;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @Plugin(id = Main.id, name = Main.name, version = "0.2", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
+    private static Main instance = new Main();
+    public static Main getInstance() {
+        return instance;
+    }
     public static final String id = "xppokedex";
     public static final String name = "xP// PokeDex";
     private static final Logger log = LoggerFactory.getLogger(name);
+
+    private static EconomyService economyService;
+
+    @Listener
+    public void onChangeServiceProvider(ChangeServiceProviderEvent event) {
+        if (event.getService().equals(EconomyService.class)) {
+            economyService = (EconomyService) event.getNewProviderRegistration().getProvider();
+        }
+    }
+
+    public void addMoney(Player p, int amount) {
+        Optional<UniqueAccount> uOpt = economyService.getOrCreateAccount(p.getUniqueId());
+        if(uOpt.isPresent()) {
+            UniqueAccount account = uOpt.get();
+            BigDecimal requiredAmount = BigDecimal.valueOf(amount);
+            TransactionResult result = account.deposit(economyService.getDefaultCurrency(), requiredAmount, Cause.source(this).build());
+            if (result.getResult() == ResultType.SUCCESS) {
+                p.sendMessage(Text.of("\u00A7f[\u00A76PokeDex\u00A7f] \u00A7e" + amount + " \u00A76has been deposited into your account!"));
+            } else {
+                p.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cUnable to give money, something broke!"));
+            }
+        }
+    }
 
     CommandSpec claim = CommandSpec.builder()
             .description(Text.of("Claim PokeDex rewards!"))
@@ -69,5 +105,6 @@ public class Main {
         Config.getInstance().setup(configFile, configLoader);
         log.info("Loaded v0.2!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
+        Sponge.getServiceManager().provide(EconomyService.class);
     }
 }

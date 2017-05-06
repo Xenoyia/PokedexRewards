@@ -5,6 +5,7 @@ import com.pixelmonmod.pixelmon.enums.EnumPokemon;
 import net.minecraft.entity.player.EntityPlayerMP;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -12,17 +13,26 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.service.economy.EconomyService;
+import org.spongepowered.api.service.economy.account.Account;
+import org.spongepowered.api.service.economy.account.UniqueAccount;
+import org.spongepowered.api.service.economy.transaction.ResultType;
+import org.spongepowered.api.service.economy.transaction.TransactionResult;
 import org.spongepowered.api.text.Text;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Claim implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         if(src instanceof Player) {
             Player player = (Player) src;
-            UUID uuid = player.getUniqueId();
             double percent = Utils.getInstance().calcPercent((EntityPlayerMP) player);
             int numClaimed = 0;
             if(percent >= 10) {
@@ -41,6 +51,10 @@ public class Claim implements CommandExecutor {
                         }
 
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 20) {
@@ -54,10 +68,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward20", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward20", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 30) {
@@ -71,10 +89,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward30", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward30", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 40) {
@@ -88,10 +110,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward40", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward40", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 50) {
@@ -105,10 +131,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward50", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward50", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 60) {
@@ -122,10 +152,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward60", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward60", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 70) {
@@ -139,10 +173,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward70", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward70", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 80) {
@@ -156,10 +194,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward80", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward80", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 90) {
@@ -173,10 +215,14 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward90", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward90", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt());
+                    }
                 }
             }
             if(percent >= 100) {
@@ -186,14 +232,20 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f100% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
+                        Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7f"+player.getName()+" \u00A7bhas completed their Pokedex!"));
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "100").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
-                        int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward100", "numberOfRewards").getInt();
+                        int numRewards = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "numberOfRewards").getInt();
                         for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward100", i).getValue(TypeToken.of(ItemStack.class));
+                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
                             Utils.getInstance().giveItemStack(item, player);
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward100", "moneyReward").getInt() > 0) {
+                        Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt());
+                    }
                 } else {
                     player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have nothing left to claim, good job!"));
                 }

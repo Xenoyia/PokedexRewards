@@ -32,17 +32,22 @@ public class Remaining implements CommandExecutor {
                     if(e.toString().contentEquals("PorygonZ")) {
                         String name = "Porygon-Z";
                         int id = Pokedex.nameToID(name);
-                        contents.add(Text.of("\u00A76"+name));
+                        if(!optstorage.get().pokedex.hasCaught(id)) {
+                            contents.add(Text.of("\u00A76" + name));
+                        }
                     } else if(e.toString().contentEquals("Hooh")) {
                         String name = "Ho-Oh";
                         int id = Pokedex.nameToID(name);
-                        contents.add(Text.of("\u00A7e"+name));
-                    }
-                    int id = Pokedex.nameToID(e.toString());
-                    if(!optstorage.get().pokedex.hasCaught(id)) {
-                        if(EnumPokemon.legendaries.contains(e.toString())) {
-                            contents.add(Text.of("\u00A7e"+e.toString()));
-                        } else contents.add(Text.of("\u00A76"+e.toString()));
+                        if(!optstorage.get().pokedex.hasCaught(id)) {
+                            contents.add(Text.of("\u00A7e" + name));
+                        }
+                    } else {
+                        int id = Pokedex.nameToID(e.toString());
+                        if (!optstorage.get().pokedex.hasCaught(id)) {
+                            if (EnumPokemon.legendaries.contains(e.toString())) {
+                                contents.add(Text.of("\u00A7e" + e.toString()));
+                            } else contents.add(Text.of("\u00A76" + e.toString()));
+                        }
                     }
                 }
                 PaginationList.builder()
