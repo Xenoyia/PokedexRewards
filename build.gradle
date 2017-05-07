@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 group = 'com.xpgaming'
-version = '0.3'
+version = '0.3-fix'
 description = 'Fun things with the PokéDex!'
 
 repositories {

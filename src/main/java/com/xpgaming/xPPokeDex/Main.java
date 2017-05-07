@@ -26,7 +26,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.3", dependencies = {@Dependency(id = "pixelmon")})
+@Plugin(id = Main.id, name = Main.name, version = "0.3-fix", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
     private static Main instance = new Main();
     public static Main getInstance() {
@@ -59,51 +59,57 @@ public class Main {
 
     CommandSpec claim = CommandSpec.builder()
             .description(Text.of("Claim PokeDex rewards!"))
-            .permission("xpgaming.pokedex.claim")
+            .permission("xpgaming.pokedex.base.claim")
             .executor(new Claim())
             .build();
 
     CommandSpec remaining = CommandSpec.builder()
             .description(Text.of("List Pokémon left to catch!"))
-            .permission("xpgaming.pokedex.remaining")
+            .permission("xpgaming.pokedex.base.remaining")
             .executor(new Remaining())
             .build();
 
     CommandSpec count = CommandSpec.builder()
             .description(Text.of("Count number of Pokemon caught!"))
-            .permission("xpgaming.pokedex.count")
+            .permission("xpgaming.pokedex.base.count")
             .executor(new Count())
             .build();
 
     CommandSpec reload = CommandSpec.builder()
             .description(Text.of("Reload the config!"))
-            .permission("xpgaming.pokedex.admin")
+            .permission("xpgaming.pokedex.admin.reload")
             .executor(new Reload())
             .build();
 
     CommandSpec getshinytoken = CommandSpec.builder()
             .description(Text.of("Get a shiny token!"))
-            .permission("xpgaming.pokedex.admin")
+            .permission("xpgaming.pokedex.admin.gst")
             .executor(new GetShinyToken())
             .build();
 
     CommandSpec convert = CommandSpec.builder()
             .description(Text.of("Convert <slot> into a shiny!"))
             .arguments(GenericArguments.onlyOne(GenericArguments.integer(Text.of("slot"))))
-            .permission("xpgaming.pokedex.convert")
+            .permission("xpgaming.pokedex.base.convert")
             .executor(new Convert())
             .build();
 
     CommandSpec pokedex = CommandSpec.builder()
             .description(Text.of("PokéDex things!"))
-            .permission("xpgaming.pokedex")
+            .permission("xpgaming.pokedex.base")
             .child(claim, "cl", "claim")
-            .child(reload, "rl", "reload")
             .child(count, "c", "count", "co")
-            .child(getshinytoken, "gst", "gettoken", "getshinytoken")
             .child(convert, "con", "convert", "conv")
             .child(remaining, "r", "remaining", "remain", "rem")
             .executor(new PokedexBase())
+            .build();
+
+    CommandSpec pokedexAdmin = CommandSpec.builder()
+            .description(Text.of("PokéDex admin things!"))
+            .permission("xpgaming.pokedex.admin")
+            .child(reload, "rl", "reload")
+            .child(getshinytoken, "gst", "gettoken", "getshinytoken")
+            .executor(new PokedexAdmin())
             .build();
 
     @Inject
@@ -117,8 +123,9 @@ public class Main {
     @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
-        log.info("Loaded v0.3!");
+        log.info("Loaded v0.3-fix!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
+        Sponge.getCommandManager().register(this, pokedexAdmin, "pokedexadmin", "pda", "dexadmin");
         Sponge.getServiceManager().provide(EconomyService.class);
     }
 }
