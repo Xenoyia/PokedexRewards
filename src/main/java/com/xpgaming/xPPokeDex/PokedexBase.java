@@ -23,7 +23,7 @@ public class PokedexBase implements CommandExecutor {
                 player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex claim\u00A7f|\u00A7bcl \u00A77- Claim rewards every 10%!"));
             }
             if(player.hasPermission("xpgaming.pokedex.convert")) {
-                player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex convert <slot> \u00A77- Use a shiny token to convert a Pokemon!"));
+                player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex convert <slot> \u00A77- Use a shiny token!"));
             }
             if(player.hasPermission("xpgaming.pokedex.reload")) {
                 player.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex reload\u00A7f|\u00A7brl \u00A77- Reload config!"));
@@ -33,7 +33,7 @@ public class PokedexBase implements CommandExecutor {
             src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex count\u00A7f|\u00A7bc \u00A77- Count remaining Pokemon to catch!"));
             src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex remaining\u00A7f|\u00A7br \u00A77- List remaining Pokemon to catch!"));
             src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex claim\u00A7f|\u00A7bcl \u00A77- Claim rewards every 10%!"));
-            src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex convert <slot> \u00A77- Use a shiny token to convert a Pokemon!"));
+            src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex convert <slot> \u00A77- Use a shiny token!"));
             src.sendMessage(Text.of("  \u00A77> \u00A7b/pokedex reload\u00A7f|\u00A7brl \u00A77- Reload config!"));
         }
         return CommandResult.success();

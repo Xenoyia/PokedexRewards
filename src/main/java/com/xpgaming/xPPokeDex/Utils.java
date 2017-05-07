@@ -58,7 +58,7 @@ public class Utils {
                 .quantity(1)
                 .build();
         token.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Shiny Token"));
-        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Right-click to transform your\ncurrently selected Pokemon\ninto a shiny!"));
+        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Use /pd convert <slot> to\ntransform your currently\nselected Pokemon\ninto a shiny!\n", TextColors.GOLD, "||Shiny Token||"));
         token.offer(Keys.ITEM_LORE, lore);
         return token;
     }

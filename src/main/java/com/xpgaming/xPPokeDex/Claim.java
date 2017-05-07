@@ -35,13 +35,13 @@ public class Claim implements CommandExecutor {
             Player player = (Player) src;
             double percent = Utils.getInstance().calcPercent((EntityPlayerMP) player);
             int numClaimed = 0;
+            int moneyClaimed = 0;
             if(percent >= 10) {
                 // Eligible for 10% reward!
                 if(!Utils.getInstance().hasClaimed(player, "10")) {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f10% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "10").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -64,6 +64,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward10", "shinyTokens").getInt() > 0) {
@@ -79,7 +80,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f20% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "20").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -101,6 +101,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward20", "shinyTokens").getInt() > 0) {
@@ -116,7 +117,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f30% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "30").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -138,6 +138,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward30", "shinyTokens").getInt() > 0) {
@@ -153,7 +154,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f40% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "40").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -175,6 +175,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward40", "shinyTokens").getInt() > 0) {
@@ -190,7 +191,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f50% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "50").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -212,6 +212,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward50", "shinyTokens").getInt() > 0) {
@@ -227,7 +228,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f60% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "60").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -249,6 +249,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward60", "shinyTokens").getInt() > 0) {
@@ -264,7 +265,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f70% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "70").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -286,6 +286,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward70", "shinyTokens").getInt() > 0) {
@@ -301,7 +302,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f80% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "80").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -323,6 +323,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward80", "shinyTokens").getInt() > 0) {
@@ -338,7 +339,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f90% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "90").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
@@ -360,6 +360,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward90", "shinyTokens").getInt() > 0) {
@@ -375,7 +376,6 @@ public class Claim implements CommandExecutor {
                     // And you haven't claimed it already, woo!
                     try {
                         numClaimed++;
-                        player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f100% \u00A7breward!"));
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7f"+player.getName()+" \u00A7bhas completed their Pokedex!"));
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "100").setValue(true);
@@ -398,6 +398,7 @@ public class Claim implements CommandExecutor {
 
                     if(Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt());
+                        moneyClaimed += Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt();
                     }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "shinyTokens").getInt() > 0) {
@@ -410,8 +411,14 @@ public class Claim implements CommandExecutor {
                 }
             }
 
+            if(moneyClaimed > 0) {
+                player.sendMessage(Text.of("\u00A7f[\u00A76PokeDex\u00A7f] \u00A7e"+moneyClaimed+" \u00A76has been added to your account!"));
+            }
+
             if(numClaimed == 0) {
                 player.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cYou have nothing to claim right now!"));
+            } else {
+                player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed \u00A7f"+numClaimed+" \u00A7breward tiers!"));
             }
         } else {
             src.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cYou need to be a player to run this command!"));

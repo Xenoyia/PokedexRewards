@@ -51,9 +51,7 @@ public class Main {
             UniqueAccount account = uOpt.get();
             BigDecimal requiredAmount = BigDecimal.valueOf(amount);
             TransactionResult result = account.deposit(economyService.getDefaultCurrency(), requiredAmount, Cause.source(this).build());
-            if (result.getResult() == ResultType.SUCCESS) {
-                p.sendMessage(Text.of("\u00A7f[\u00A76PokeDex\u00A7f] \u00A7e" + amount + " \u00A76has been deposited into your account!"));
-            } else {
+            if (!(result.getResult() == ResultType.SUCCESS)) {
                 p.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cUnable to give money, something broke!"));
             }
         }

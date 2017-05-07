@@ -11,27 +11,41 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.ItemStackComparators;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Optional;
 
 public class Convert implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         if(src instanceof Player) {
             int slot = args.<Integer>getOne("slot").get();
+            boolean holdingAShinyToken = false;
             if(slot <= 6 && slot >= 1) {
                 Player player = (Player) src;
-                if(player.getItemInHand(HandTypes.MAIN_HAND).equals(Utils.getInstance().shinyToken())) {
+                Optional<ItemStack> itemInHand = player.getItemInHand(HandTypes.MAIN_HAND);
+                if(itemInHand.isPresent()) {
+                    src.sendMessage(Text.of("item in hand"));
+                    ItemStack theItem = itemInHand.get();
+                    if(ItemStackComparators.ITEM_DATA.compare(theItem, Utils.getInstance().shinyToken()) == 0) {
+                        src.sendMessage(Text.of("it's a token!"));
+                        holdingAShinyToken = true;
+                    }
+                }
+                if(holdingAShinyToken) {
                     EntityPlayerMP entity = (EntityPlayerMP) src;
                     Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(entity);
                     if (optstorage.isPresent()) {
                         PlayerStorage storage = (PlayerStorage) optstorage.get();
                         NBTTagCompound nbt = storage.partyPokemon[slot - 1];
-                        if(nbt == null || nbt.getBoolean("isEgg")) {
+                        if(nbt == null || nbt.getBoolean(NbtKeys.IS_EGG)) {
                             src.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cThere's not a valid Pokemon in slot "+slot+"!"));
                         } else {
                             int isShiny = nbt.getInteger(NbtKeys.IS_SHINY);
@@ -40,7 +54,6 @@ public class Convert implements CommandExecutor {
                             } else {
                                 nbt.setInteger(NbtKeys.IS_SHINY, 1);
                                 src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bSuccessfully converted that Pokemon to shiny!"));
-                                Optional<ItemStack> itemInHand = player.getItemInHand(HandTypes.MAIN_HAND);
                                 if(itemInHand.isPresent()) {
                                     int amount = itemInHand.get().getQuantity();
                                     if(amount == 1) {

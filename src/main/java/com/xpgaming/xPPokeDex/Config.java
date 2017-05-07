@@ -159,7 +159,7 @@ public class Config {
             rewards.getNode("reward40", "numberOfRewards").setValue(2);
             rewards.getNode("reward40", 1, "item").setValue(TypeToken.of(ItemStack.class), reward40);
             rewards.getNode("reward40", 2, "item").setValue(TypeToken.of(ItemStack.class), reward40b);
-            rewards.getNode("reward50", "shinyTokens").setValue("0");
+            rewards.getNode("reward50", "shinyTokens").setValue("1");
             rewards.getNode("reward50", "moneyReward").setValue("300");
             rewards.getNode("reward50", "numberOfRewards").setValue(2);
             rewards.getNode("reward50", 1, "item").setValue(TypeToken.of(ItemStack.class), reward50);
@@ -186,7 +186,7 @@ public class Config {
             rewards.getNode("reward90", 1, "item").setValue(TypeToken.of(ItemStack.class), reward90);
             rewards.getNode("reward90", 2, "item").setValue(TypeToken.of(ItemStack.class), reward90b);
             rewards.getNode("reward90", 3, "item").setValue(TypeToken.of(ItemStack.class), reward90c);
-            rewards.getNode("rewardfinal", "shinyTokens").setValue("0");
+            rewards.getNode("rewardfinal", "shinyTokens").setValue("3");
             rewards.getNode("rewardfinal", "moneyReward").setValue("8000");
             rewards.getNode("rewardfinal", "numberOfRewards").setValue(3);
             rewards.getNode("rewardfinal", 1, "item").setValue(TypeToken.of(ItemStack.class), rewardfinal);
