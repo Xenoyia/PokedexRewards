@@ -32,10 +32,8 @@ public class Convert implements CommandExecutor {
                 Player player = (Player) src;
                 Optional<ItemStack> itemInHand = player.getItemInHand(HandTypes.MAIN_HAND);
                 if(itemInHand.isPresent()) {
-                    src.sendMessage(Text.of("item in hand"));
                     ItemStack theItem = itemInHand.get();
                     if(ItemStackComparators.ITEM_DATA.compare(theItem, Utils.getInstance().shinyToken()) == 0) {
-                        src.sendMessage(Text.of("it's a token!"));
                         holdingAShinyToken = true;
                     }
                 }
