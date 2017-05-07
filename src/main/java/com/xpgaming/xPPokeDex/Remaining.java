@@ -26,36 +26,41 @@ public class Remaining implements CommandExecutor {
             Player player = (Player) src;
             EntityPlayerMP entity = (EntityPlayerMP) src;
             Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(entity);
+            double percent = Utils.getInstance().calcPercent((EntityPlayerMP) player);
             if(optstorage.isPresent()) {
-                List<Text> contents = new ArrayList<>();
-                for(EnumPokemon e : EnumPokemon.values()) {
-                    if(e.toString().contentEquals("PorygonZ")) {
-                        String name = "Porygon-Z";
-                        int id = Pokedex.nameToID(name);
-                        if(!optstorage.get().pokedex.hasCaught(id)) {
-                            contents.add(Text.of("\u00A76" + name));
-                        }
-                    } else if(e.toString().contentEquals("Hooh")) {
-                        String name = "Ho-Oh";
-                        int id = Pokedex.nameToID(name);
-                        if(!optstorage.get().pokedex.hasCaught(id)) {
-                            contents.add(Text.of("\u00A7e" + name));
-                        }
-                    } else {
-                        int id = Pokedex.nameToID(e.toString());
-                        if (!optstorage.get().pokedex.hasCaught(id)) {
-                            if (EnumPokemon.legendaries.contains(e.toString())) {
-                                contents.add(Text.of("\u00A7e" + e.toString()));
-                            } else contents.add(Text.of("\u00A76" + e.toString()));
+                if (percent < 100) {
+                    List<Text> contents = new ArrayList<>();
+                    for (EnumPokemon e : EnumPokemon.values()) {
+                        if (e.toString().contentEquals("PorygonZ")) {
+                            String name = "Porygon-Z";
+                            int id = Pokedex.nameToID(name);
+                            if (!optstorage.get().pokedex.hasCaught(id)) {
+                                contents.add(Text.of("\u00A76" + name));
+                            }
+                        } else if (e.toString().contentEquals("Hooh")) {
+                            String name = "Ho-Oh";
+                            int id = Pokedex.nameToID(name);
+                            if (!optstorage.get().pokedex.hasCaught(id)) {
+                                contents.add(Text.of("\u00A7e" + name));
+                            }
+                        } else {
+                            int id = Pokedex.nameToID(e.toString());
+                            if (!optstorage.get().pokedex.hasCaught(id)) {
+                                if (EnumPokemon.legendaries.contains(e.toString())) {
+                                    contents.add(Text.of("\u00A7e" + e.toString()));
+                                } else contents.add(Text.of("\u00A76" + e.toString()));
+                            }
                         }
                     }
+                    PaginationList.builder()
+                            .title(Text.builder("Pokemon Remaining").color(TextColors.GOLD).build())
+                            .contents(contents)
+                            .padding(Text.builder("-").color(TextColors.YELLOW).build())
+                            .sendTo(player);
                 }
-                PaginationList.builder()
-                        .title(Text.builder("Pokemon Remaining").color(TextColors.GOLD).build())
-                        .contents(contents)
-                        .padding(Text.builder("-").color(TextColors.YELLOW).build())
-                        .sendTo(player);
-               }
+            } else {
+                src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have no more Pokemon to catch, well done!"));
+            }
 
         } else {
             src.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cYou need to be a player to run this command!"));

@@ -40,17 +40,6 @@ public class Config {
         return i;
     }
 
-    /*public ItemStack ShinyToken() {
-        ItemStack token = ItemStack.builder()
-                .itemType(ItemTypes.PAPER)
-                .quantity(1)
-                .build();
-        token.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Shiny Token"));
-        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Right-click to transform your\ncurrently selected Pokemon\ninto a shiny!"));
-        token.offer(Keys.ITEM_LORE, lore);
-        return token;
-    }*/
-
     public void configCreate() throws ObjectMappingException {
         try {
             configFile.createNewFile();
@@ -117,51 +106,92 @@ public class Config {
                     .itemType(Type("pixelmon:park_ball"))
                     .quantity(2)
                     .build();
+            ItemStack reward80b = ItemStack.builder()
+                    .itemType(Type("pixelmon:ether"))
+                    .quantity(2)
+                    .build();
+            ItemStack reward80c = ItemStack.builder()
+                    .itemType(Type("pixelmon:max_revive"))
+                    .quantity(2)
+                    .build();
             ItemStack reward90 = ItemStack.builder()
                     .itemType(Type("pixelmon:park_ball"))
                     .quantity(2)
+                    .build();
+            ItemStack reward90b = ItemStack.builder()
+                    .itemType(Type("pixelmon:ether"))
+                    .quantity(4)
+                    .build();
+            ItemStack reward90c = ItemStack.builder()
+                    .itemType(Type("pixelmon:max_revive"))
+                    .quantity(4)
                     .build();
             ItemStack rewardfinal = ItemStack.builder()
                     .itemType(Type("pixelmon:dynamo_badge"))
                     .quantity(1)
                     .build();
+            ItemStack rewardfinalb = ItemStack.builder()
+                    .itemType(Type("pixelmon:ether"))
+                    .quantity(8)
+                    .build();
+            ItemStack rewardfinalc = ItemStack.builder()
+                    .itemType(Type("pixelmon:max_revive"))
+                    .quantity(8)
+                    .build();
+            rewards.getNode("reward10", "shinyTokens").setValue("0");
             rewards.getNode("reward10", "numberOfRewards").setValue(2);
             rewards.getNode("reward10", "moneyReward").setValue("100");
-            rewards.getNode("reward10", 1).setValue(TypeToken.of(ItemStack.class), reward10);
-            rewards.getNode("reward10", 2).setValue(TypeToken.of(ItemStack.class), reward10b);
+            rewards.getNode("reward10", 1, "item").setValue(TypeToken.of(ItemStack.class), reward10);
+            rewards.getNode("reward10", 2, "item").setValue(TypeToken.of(ItemStack.class), reward10b);
+            rewards.getNode("reward20", "shinyTokens").setValue("0");
             rewards.getNode("reward20", "moneyReward").setValue("150");
             rewards.getNode("reward20", "numberOfRewards").setValue(2);
-            rewards.getNode("reward20", 1).setValue(TypeToken.of(ItemStack.class), reward20);
-            rewards.getNode("reward20", 2).setValue(TypeToken.of(ItemStack.class), reward20b);
+            rewards.getNode("reward20", 1, "item").setValue(TypeToken.of(ItemStack.class), reward20);
+            rewards.getNode("reward20", 2, "item").setValue(TypeToken.of(ItemStack.class), reward20b);
+            rewards.getNode("reward20", 2, "command").setValue("say This is an example command reward! %player% can be used as a placeholder!");
+            rewards.getNode("reward30", "shinyTokens").setValue("0");
             rewards.getNode("reward30", "moneyReward").setValue("200");
             rewards.getNode("reward30", "numberOfRewards").setValue(2);
-            rewards.getNode("reward30", 1).setValue(TypeToken.of(ItemStack.class), reward30);
-            rewards.getNode("reward30", 2).setValue(TypeToken.of(ItemStack.class), reward30b);
+            rewards.getNode("reward30", 1, "item").setValue(TypeToken.of(ItemStack.class), reward30);
+            rewards.getNode("reward30", 2, "item").setValue(TypeToken.of(ItemStack.class), reward30b);
+            rewards.getNode("reward40", "shinyTokens").setValue("0");
             rewards.getNode("reward40", "moneyReward").setValue("250");
             rewards.getNode("reward40", "numberOfRewards").setValue(2);
-            rewards.getNode("reward40", 1).setValue(TypeToken.of(ItemStack.class), reward40);
-            rewards.getNode("reward40", 2).setValue(TypeToken.of(ItemStack.class), reward40b);
+            rewards.getNode("reward40", 1, "item").setValue(TypeToken.of(ItemStack.class), reward40);
+            rewards.getNode("reward40", 2, "item").setValue(TypeToken.of(ItemStack.class), reward40b);
+            rewards.getNode("reward50", "shinyTokens").setValue("0");
             rewards.getNode("reward50", "moneyReward").setValue("300");
             rewards.getNode("reward50", "numberOfRewards").setValue(2);
-            rewards.getNode("reward50", 1).setValue(TypeToken.of(ItemStack.class), reward50);
-            rewards.getNode("reward50", 2).setValue(TypeToken.of(ItemStack.class), reward50b);
+            rewards.getNode("reward50", 1, "item").setValue(TypeToken.of(ItemStack.class), reward50);
+            rewards.getNode("reward50", 2, "item").setValue(TypeToken.of(ItemStack.class), reward50b);
+            rewards.getNode("reward60", "shinyTokens").setValue("0");
             rewards.getNode("reward60", "moneyReward").setValue("500");
             rewards.getNode("reward60", "numberOfRewards").setValue(2);
-            rewards.getNode("reward60", 1).setValue(TypeToken.of(ItemStack.class), reward60);
-            rewards.getNode("reward60", 2).setValue(TypeToken.of(ItemStack.class), reward60b);
+            rewards.getNode("reward60", 1, "item").setValue(TypeToken.of(ItemStack.class), reward60);
+            rewards.getNode("reward60", 2, "item").setValue(TypeToken.of(ItemStack.class), reward60b);
+            rewards.getNode("reward70", "shinyTokens").setValue("0");
             rewards.getNode("reward70", "moneyReward").setValue("800");
             rewards.getNode("reward70", "numberOfRewards").setValue(2);
-            rewards.getNode("reward70", 1).setValue(TypeToken.of(ItemStack.class), reward70);
-            rewards.getNode("reward70", 2).setValue(TypeToken.of(ItemStack.class), reward70b);
+            rewards.getNode("reward70", 1, "item").setValue(TypeToken.of(ItemStack.class), reward70);
+            rewards.getNode("reward70", 2, "item").setValue(TypeToken.of(ItemStack.class), reward70b);
+            rewards.getNode("reward80", "shinyTokens").setValue("0");
             rewards.getNode("reward80", "moneyReward").setValue("1600");
-            rewards.getNode("reward80", "numberOfRewards").setValue(1);
-            rewards.getNode("reward80", 1).setValue(TypeToken.of(ItemStack.class), reward80);
+            rewards.getNode("reward80", "numberOfRewards").setValue(3);
+            rewards.getNode("reward80", 1, "item").setValue(TypeToken.of(ItemStack.class), reward80);
+            rewards.getNode("reward80", 2, "item").setValue(TypeToken.of(ItemStack.class), reward80b);
+            rewards.getNode("reward80", 3, "item").setValue(TypeToken.of(ItemStack.class), reward80c);
+            rewards.getNode("reward90", "shinyTokens").setValue("0");
             rewards.getNode("reward90", "moneyReward").setValue("3500");
-            rewards.getNode("reward90", "numberOfRewards").setValue(1);
-            rewards.getNode("reward90", 1).setValue(TypeToken.of(ItemStack.class), reward90);
+            rewards.getNode("reward90", "numberOfRewards").setValue(3);
+            rewards.getNode("reward90", 1, "item").setValue(TypeToken.of(ItemStack.class), reward90);
+            rewards.getNode("reward90", 2, "item").setValue(TypeToken.of(ItemStack.class), reward90b);
+            rewards.getNode("reward90", 3, "item").setValue(TypeToken.of(ItemStack.class), reward90c);
+            rewards.getNode("rewardfinal", "shinyTokens").setValue("0");
             rewards.getNode("rewardfinal", "moneyReward").setValue("8000");
-            rewards.getNode("rewardfinal", "numberOfRewards").setValue(1);
-            rewards.getNode("rewardfinal", 1).setValue(TypeToken.of(ItemStack.class), rewardfinal);
+            rewards.getNode("rewardfinal", "numberOfRewards").setValue(3);
+            rewards.getNode("rewardfinal", 1, "item").setValue(TypeToken.of(ItemStack.class), rewardfinal);
+            rewards.getNode("rewardfinal", 2, "item").setValue(TypeToken.of(ItemStack.class), rewardfinalb);
+            rewards.getNode("rewardfinal", 3, "item").setValue(TypeToken.of(ItemStack.class), rewardfinalc);
             configSave();
         } catch (IOException e) {
             e.printStackTrace();

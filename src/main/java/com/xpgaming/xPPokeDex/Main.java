@@ -2,19 +2,20 @@ package com.xpgaming.xPPokeDex;
 import com.google.inject.Inject;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
-import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.entity.InteractEntityEvent;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.api.service.economy.EconomyService;
 import org.spongepowered.api.service.economy.account.UniqueAccount;
 import org.spongepowered.api.service.economy.transaction.ResultType;
@@ -25,7 +26,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.2", dependencies = {@Dependency(id = "pixelmon")})
+@Plugin(id = Main.id, name = Main.name, version = "0.3", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
     private static Main instance = new Main();
     public static Main getInstance() {
@@ -82,12 +83,20 @@ public class Main {
             .executor(new Reload())
             .build();
 
+    CommandSpec convert = CommandSpec.builder()
+            .description(Text.of("Convert <slot> into a shiny!"))
+            .arguments(GenericArguments.onlyOne(GenericArguments.integer(Text.of("slot"))))
+            .permission("xpgaming.pokedex.convert")
+            .executor(new Convert())
+            .build();
+
     CommandSpec pokedex = CommandSpec.builder()
             .description(Text.of("PokéDex things!"))
             .permission("xpgaming.pokedex")
             .child(claim, "cl", "claim")
             .child(reload, "rl", "reload")
             .child(count, "c", "count", "co")
+            .child(convert, "con", "convert", "conv")
             .child(remaining, "r", "remaining", "remain", "rem")
             .executor(new PokedexBase())
             .build();
@@ -103,7 +112,7 @@ public class Main {
     @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
-        log.info("Loaded v0.2!");
+        log.info("Loaded v0.3!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
         Sponge.getServiceManager().provide(EconomyService.class);
     }

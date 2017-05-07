@@ -42,18 +42,34 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f10% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "10").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward10", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward10", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward10", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward10", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward10", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward10", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
 
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward10", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward10", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward10", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -64,17 +80,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f20% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "20").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward20", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward20", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward20", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward20", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward20", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -85,17 +117,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f30% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "30").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward30", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward30", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward30", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward30", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward30", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -106,17 +154,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f40% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "40").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward40", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward40", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward40", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward40", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward40", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -127,17 +191,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f50% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "50").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward50", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward50", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward50", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward50", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward50", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -148,17 +228,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f60% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "60").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward60", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward60", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward60", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward60", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward60", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -169,17 +265,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f70% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "70").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward70", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward70", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward70", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward70", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward70", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -190,17 +302,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f80% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "80").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward80", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward80", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward80", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward80", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward80", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -211,17 +339,33 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have claimed the \u00A7f90% \u00A7breward!"));
+                        EntityPlayerMP emp = (EntityPlayerMP) player;
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "90").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward90", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "reward90", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
                     if(Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "reward90", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "reward90", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "reward90", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 }
             }
@@ -237,14 +381,29 @@ public class Claim implements CommandExecutor {
                         Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "100").setValue(true);
                         Config.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "numberOfRewards").getInt();
-                        for(int i = 1; i < numRewards+1; i++) {
-                            ItemStack item = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i)).getValue(TypeToken.of(ItemStack.class));
-                            Utils.getInstance().giveItemStack(item, player);
+                        if(numRewards > 0) {
+                            for(int i = 1; i < numRewards+1; i++) {
+                                //If an item reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i), "item").isVirtual()) {
+                                    ItemStack item = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i), "item").getValue(TypeToken.of(ItemStack.class));
+                                    Utils.getInstance().giveItemStack(item, player);
+                                }
+                                //If a command reward exists..
+                                if(!Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i), "command").isVirtual()) {
+                                    Utils.getInstance().runConsoleCommand(Config.getInstance().getConfig().getNode("rewards", "rewardfinal", String.valueOf(i), "command").getString().replaceAll("%player%", emp.getName()));
+                                }
+                            }
                         }
                     } catch (ObjectMappingException e) { e.printStackTrace(); }
 
-                    if(Config.getInstance().getConfig().getNode("rewards", "reward100", "moneyReward").getInt() > 0) {
+                    if(Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt() > 0) {
                         Main.getInstance().addMoney(player, Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "moneyReward").getInt());
+                    }
+
+                    if(Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "shinyTokens").getInt() > 0) {
+                        for(int i = 0; i < Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "shinyTokens").getInt(); i++) {
+                            Utils.getInstance().giveItemStack(Utils.getInstance().shinyToken(), player);
+                        }
                     }
                 } else {
                     player.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have nothing left to claim, good job!"));

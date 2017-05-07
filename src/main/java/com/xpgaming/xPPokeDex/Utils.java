@@ -1,5 +1,6 @@
 package com.xpgaming.xPPokeDex;
 
+import com.google.common.collect.Lists;
 import com.pixelmonmod.pixelmon.enums.EnumPokemon;
 import com.pixelmonmod.pixelmon.storage.PixelmonStorage;
 import com.pixelmonmod.pixelmon.storage.PlayerStorage;
@@ -13,17 +14,25 @@ import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.entity.spawn.SpawnCause;
 import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
 import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.type.GridInventory;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.world.World;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Utils {
     private static Utils instance = new Utils();
     public static Utils getInstance() {
         return instance;
+    }
+
+    public void runConsoleCommand(String cmd) {
+        Sponge.getCommandManager().process(Sponge.getServer().getConsole(), cmd);
     }
 
     public void giveItemStack(ItemStack i, Player player) {
@@ -41,6 +50,17 @@ public class Utils {
             world.spawnEntity(it, Cause.source(spawnCause).build());
         }
 
+    }
+
+    public ItemStack shinyToken() {
+        ItemStack token = ItemStack.builder()
+                .itemType(ItemTypes.PAPER)
+                .quantity(1)
+                .build();
+        token.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Shiny Token"));
+        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Right-click to transform your\ncurrently selected Pokemon\ninto a shiny!"));
+        token.offer(Keys.ITEM_LORE, lore);
+        return token;
     }
 
     public double calcPercent(EntityPlayerMP entity) {
