@@ -77,8 +77,14 @@ public class Main {
 
     CommandSpec reload = CommandSpec.builder()
             .description(Text.of("Reload the config!"))
-            .permission("xpgaming.pokedex.reload")
+            .permission("xpgaming.pokedex.admin")
             .executor(new Reload())
+            .build();
+
+    CommandSpec getshinytoken = CommandSpec.builder()
+            .description(Text.of("Get a shiny token!"))
+            .permission("xpgaming.pokedex.admin")
+            .executor(new GetShinyToken())
             .build();
 
     CommandSpec convert = CommandSpec.builder()
@@ -94,6 +100,7 @@ public class Main {
             .child(claim, "cl", "claim")
             .child(reload, "rl", "reload")
             .child(count, "c", "count", "co")
+            .child(getshinytoken, "gst", "gettoken", "getshinytoken")
             .child(convert, "con", "convert", "conv")
             .child(remaining, "r", "remaining", "remain", "rem")
             .executor(new PokedexBase())
