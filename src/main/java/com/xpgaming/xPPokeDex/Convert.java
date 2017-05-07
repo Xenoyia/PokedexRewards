@@ -43,7 +43,7 @@ public class Convert implements CommandExecutor {
                     if (optstorage.isPresent()) {
                         PlayerStorage storage = (PlayerStorage) optstorage.get();
                         NBTTagCompound nbt = storage.partyPokemon[slot - 1];
-                        if(nbt == null || nbt.getBoolean(NbtKeys.IS_EGG)) {
+                        if(nbt == null) {
                             src.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cThere's not a valid Pokemon in slot "+slot+"!"));
                         } else {
                             int isShiny = nbt.getInteger(NbtKeys.IS_SHINY);
@@ -51,7 +51,9 @@ public class Convert implements CommandExecutor {
                                 src.sendMessage(Text.of("\u00A7f[\u00A7cPokeDex\u00A7f] \u00A7cThat Pokemon is already shiny!"));
                             } else {
                                 nbt.setInteger(NbtKeys.IS_SHINY, 1);
-                                src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bSuccessfully converted that Pokemon to shiny!"));
+                                if(nbt.getBoolean(NbtKeys.IS_EGG))
+                                    src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bSuccessfully converted! It will hatch as a shiny!"));
+                                else src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bSuccessfully converted that Pokemon to a shiny!"));
                                 if(itemInHand.isPresent()) {
                                     int amount = itemInHand.get().getQuantity();
                                     if(amount == 1) {
