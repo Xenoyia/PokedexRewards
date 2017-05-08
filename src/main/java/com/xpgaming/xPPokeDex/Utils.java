@@ -58,7 +58,18 @@ public class Utils {
                 .quantity(1)
                 .build();
         token.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Shiny Token"));
-        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Use /pd convert <slot> to\ntransform your selected\nPokemon into a shiny!\n", TextColors.GOLD, "||Shiny Token||"));
+        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "Use /pd convert <slot> to redeem!"));
+        token.offer(Keys.ITEM_LORE, lore);
+        return token;
+    }
+
+    public ItemStack oldShinyToken() {
+        ItemStack token = ItemStack.builder()
+                .itemType(ItemTypes.PAPER)
+                .quantity(1)
+                .build();
+        token.offer(Keys.DISPLAY_NAME, Text.of(TextColors.GOLD, "Shiny Token"));
+        List<Text> lore = Lists.newArrayList(Text.of(TextColors.YELLOW, "/pd convert <slot> to\ntransform your selected\nPokemon into a shiny!\n", TextColors.GOLD, "||Shiny Token||"));
         token.offer(Keys.ITEM_LORE, lore);
         return token;
     }

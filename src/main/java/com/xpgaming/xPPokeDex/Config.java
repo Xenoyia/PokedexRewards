@@ -5,12 +5,14 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
+import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.config.PixelmonItemsPokeballs;
 import com.pixelmonmod.pixelmon.items.PixelmonItem;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.item.EnchantmentData;
 import org.spongepowered.api.data.meta.ItemEnchantment;
@@ -30,10 +32,12 @@ public class Config {
     public static Config getInstance() {
         return instance;
     }
+    @Inject
+    @DefaultConfig(sharedRoot = false) private File configDir;
 
     private ConfigurationLoader<CommentedConfigurationNode> configLoader;
     private CommentedConfigurationNode config;
-    private File configFile;
+    private File configFile = new File(this.configDir, "config.conf");
 
     public ItemType Type(String item) {
         ItemType i = Sponge.getGame().getRegistry().getType(ItemType.class,item).get();

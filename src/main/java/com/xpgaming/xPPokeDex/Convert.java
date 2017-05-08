@@ -35,6 +35,8 @@ public class Convert implements CommandExecutor {
                     ItemStack theItem = itemInHand.get();
                     if(ItemStackComparators.ITEM_DATA.compare(theItem, Utils.getInstance().shinyToken()) == 0) {
                         holdingAShinyToken = true;
+                    } else if(ItemStackComparators.ITEM_DATA.compare(theItem, Utils.getInstance().oldShinyToken()) == 0) {
+                        holdingAShinyToken = true;
                     }
                 }
                 if(holdingAShinyToken) {
@@ -60,6 +62,7 @@ public class Convert implements CommandExecutor {
                                         player.setItemInHand(HandTypes.MAIN_HAND, null);
                                     } else {
                                         itemInHand.get().setQuantity(amount-1);
+                                        player.setItemInHand(HandTypes.MAIN_HAND, itemInHand.get());
                                     }
                                 }
                             }
