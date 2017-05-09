@@ -1,6 +1,7 @@
 package com.xpgaming.xPPokeDex;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -9,9 +10,11 @@ import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.config.PixelmonItemsPokeballs;
 import com.pixelmonmod.pixelmon.items.PixelmonItem;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.item.EnchantmentData;
@@ -32,12 +35,11 @@ public class Config {
     public static Config getInstance() {
         return instance;
     }
-    @Inject
-    @DefaultConfig(sharedRoot = false) private File configDir;
-
-    private ConfigurationLoader<CommentedConfigurationNode> configLoader;
     private CommentedConfigurationNode config;
-    private File configFile = new File(this.configDir, "config.conf");
+    @Inject @ConfigDir(sharedRoot = false) private File configDir;
+    String path = "config"+File.separator+"xPPokeDex";
+    private File configFile = new File(path, "config.conf");
+    private ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder().setFile(configFile).build();
 
     public ItemType Type(String item) {
         ItemType i = Sponge.getGame().getRegistry().getType(ItemType.class,item).get();
@@ -46,10 +48,10 @@ public class Config {
 
     public void configCreate() throws ObjectMappingException {
         try {
+            if(!configFile.getParentFile().exists()) configFile.getParentFile().mkdir();
             configFile.createNewFile();
             configLoad();
             CommentedConfigurationNode rewards = config.getNode("rewards").setComment("xP// PokeDex coded by Xenoyia! Check out mc.xpgaming.com!");
-            CommentedConfigurationNode pd = config.getNode("playerData").setComment("Do not mess with this unless you know what you are doing!");
             ItemStack reward10 = ItemStack.builder()
                     .itemType(Type("pixelmon:tm114"))
                     .quantity(1)

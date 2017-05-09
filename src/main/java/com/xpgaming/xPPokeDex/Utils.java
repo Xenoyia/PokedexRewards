@@ -85,6 +85,6 @@ public class Utils {
     }
 
     public boolean hasClaimed(Player p, String pct) {
-        return Config.getInstance().getConfig().getNode("playerData", p.getUniqueId().toString(), pct).getBoolean();
+        return UserData.getInstance().getConfig().getNode("playerData", p.getUniqueId().toString(), pct).getBoolean();
     }
 }

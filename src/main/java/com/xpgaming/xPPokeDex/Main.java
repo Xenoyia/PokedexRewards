@@ -28,10 +28,11 @@ import org.spongepowered.api.text.Text;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.Optional;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.4", dependencies = {@Dependency(id = "pixelmon")})
+@Plugin(id = Main.id, name = Main.name, version = "0.5", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
     private static Main instance = new Main();
     public static Main getInstance() {
@@ -117,18 +118,18 @@ public class Main {
             .executor(new PokedexAdmin())
             .build();
 
-    @Inject
-    @DefaultConfig(sharedRoot = true)
-    private File configFile;
+    String path = "config"+File.separator+"xPPokeDex";
 
-    @Inject
-    @DefaultConfig(sharedRoot = true)
-    ConfigurationLoader<CommentedConfigurationNode> configLoader;
+    File configFile  = new File(path,"config.conf");
+    ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder().setFile(configFile).build();
+    File dataFile = new File(path, "data.conf");
+    ConfigurationLoader<CommentedConfigurationNode> dataLoader = HoconConfigurationLoader.builder().setFile(dataFile).build();
 
     @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
-        log.info("Loaded v0.4!");
+        UserData.getInstance().setup(dataFile, dataLoader);
+        log.info("Loaded v0.5!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
         Sponge.getCommandManager().register(this, pokedexAdmin, "pokedexadmin", "pda", "dexadmin");
         Sponge.getServiceManager().provide(EconomyService.class);

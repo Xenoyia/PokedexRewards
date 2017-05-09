@@ -43,8 +43,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "10").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "10").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward10", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -81,8 +81,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "20").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "20").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward20", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -118,8 +118,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "30").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "30").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward30", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -155,8 +155,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "40").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "40").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward40", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -192,8 +192,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "50").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "50").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward50", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -229,8 +229,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "60").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "60").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward60", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -266,8 +266,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "70").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "70").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward70", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -303,8 +303,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "80").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "80").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward80", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -340,8 +340,8 @@ public class Claim implements CommandExecutor {
                     try {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "90").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "90").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "reward90", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {
@@ -378,8 +378,8 @@ public class Claim implements CommandExecutor {
                         numClaimed++;
                         EntityPlayerMP emp = (EntityPlayerMP) player;
                         Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7f"+player.getName()+" \u00A7bhas completed their Pokedex!"));
-                        Config.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "100").setValue(true);
-                        Config.getInstance().saveAndLoadConfig();
+                        UserData.getInstance().getConfig().getNode("playerData", player.getUniqueId().toString(), "100").setValue(true);
+                        UserData.getInstance().saveAndLoadConfig();
                         int numRewards = Config.getInstance().getConfig().getNode("rewards", "rewardfinal", "numberOfRewards").getInt();
                         if(numRewards > 0) {
                             for(int i = 1; i < numRewards+1; i++) {

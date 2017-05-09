@@ -11,6 +11,7 @@ import org.spongepowered.api.text.Text;
 public class Reload implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         Config.getInstance().configLoad();
+        UserData.getInstance().dataLoad();
         src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7b\u00A7lSuccessfully reloaded the config!"));
         return CommandResult.success();
     }
