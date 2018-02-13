@@ -10,10 +10,6 @@ import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.entity.spawn.SpawnCause;
-import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
-import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.ItemTypes;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.entity.Hotbar;
@@ -46,8 +42,7 @@ public class Utils {
             Entity it = world
                     .createEntity(EntityTypes.ITEM, player.getLocation().getPosition());
                     it.offer(Keys.REPRESENTED_ITEM, i.createSnapshot());
-            SpawnCause spawnCause = SpawnCause.builder().type(SpawnTypes.PLUGIN).build();
-            world.spawnEntity(it, Cause.source(spawnCause).build());
+            world.spawnEntity(it);
         }
 
     }
