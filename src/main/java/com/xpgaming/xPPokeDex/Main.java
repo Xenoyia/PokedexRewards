@@ -6,10 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
+import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
@@ -23,7 +25,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.5", dependencies = {@Dependency(id = "pixelmon")})
+@Plugin(id = Main.id, name = Main.name, version = "0.7", dependencies = {@Dependency(id = "pixelmon")})
 public class Main {
     private static Main instance = new Main();
     public static Main getInstance() {
@@ -120,9 +122,31 @@ public class Main {
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
         UserData.getInstance().setup(dataFile, dataLoader);
-        log.info("Loaded v0.5!");
+        consoleMsg("§b       _____   ____   _____                 _             ");
+        consoleMsg("§b      |  __ \\ / / /  / ____|               (_)            ");
+        consoleMsg("§b __  _| |__) / / /  | |  __  __ _ _ __ ___  _ _ __   __ _ ");
+        consoleMsg("§b \\ \\/ |  ___/ / /   | | |_ |/ _` | '_ ` _ \\| | '_ \\ / _` |");
+        consoleMsg("§b  >  <| |  / / /    | |__| | (_| | | | | | | | | | | (_| |");
+        consoleMsg("§b /_/\\_|_| /_/_/      \\_____|\\__,_|_| |_| |_|_|_| |_|\\__, |");
+        consoleMsg("§b                                                     __/ |");
+        consoleMsg("§b                                                    |___/ ");
+        consoleMsg("");
+        consoleMsg("§f[§6xP//§f] §ePokeDex - Loaded v0.7!");
+        consoleMsg("§f[§6xP//§f] §eBy Xenoyia with help from MageFX and XpanD!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
         Sponge.getCommandManager().register(this, pokedexAdmin, "pokedexadmin", "pda", "dexadmin");
         Sponge.getServiceManager().provide(EconomyService.class);
+    }
+
+    private static Optional<ConsoleSource> getConsole() {
+        if (Sponge.isServerAvailable())
+            return Optional.of(Sponge.getServer().getConsole());
+        else
+            return Optional.empty();
+    }
+
+    public void consoleMsg(String str) {
+        getConsole().ifPresent(console ->
+                console.sendMessage(Text.of(str)));
     }
 }

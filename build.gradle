@@ -22,7 +22,7 @@ ext.spongeApiVersion = "${project.spongeAPIVersion}"
 apply plugin: "net.minecraftforge.gradle.forge"
 apply plugin: "org.spongepowered.plugin"
 
-version = "0.6-MC${project.minecraftVersion}-F${project.forgeBuild}-S${project.spongeAPIVersion.split("-")[0]}"
+version = "0.7-MC${project.minecraftVersion}-F${project.forgeBuild}-S${project.spongeAPIVersion.split("-")[0]}"
 group = modGroup
 archivesBaseName = modBaseName
 
@@ -39,7 +39,9 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
-
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 dependencies {
     compile ("org.spongepowered:spongeapi:${project.spongeApiVersion}")
