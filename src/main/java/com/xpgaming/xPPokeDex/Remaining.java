@@ -52,13 +52,13 @@ public class Remaining implements CommandExecutor {
                         }
                     }
                     PaginationList.builder()
-                            .title(Text.builder("Pokemon Remaining").color(TextColors.GOLD).build())
+                            .title(Text.builder("Pokémon Remaining").color(TextColors.GOLD).build())
                             .contents(contents)
                             .padding(Text.builder("-").color(TextColors.YELLOW).build())
                             .sendTo(player);
                 }
             } else {
-                src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have no more Pokemon to catch, well done!"));
+                src.sendMessage(Text.of("\u00A7f[\u00A7bPokeDex\u00A7f] \u00A7bYou have no more Pokémon to catch, well done!"));
             }
 
         } else {

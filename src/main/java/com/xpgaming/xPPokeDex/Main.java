@@ -69,7 +69,7 @@ public class Main {
             .build();
 
     CommandSpec count = CommandSpec.builder()
-            .description(Text.of("Count number of Pokemon caught!"))
+            .description(Text.of("Count number of Pokémon caught!"))
             .permission("xpgaming.pokedex.base.count")
             .executor(new Count())
             .build();
