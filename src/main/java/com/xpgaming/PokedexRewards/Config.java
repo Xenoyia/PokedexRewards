@@ -35,7 +35,7 @@ public class Config {
             if(!configFile.getParentFile().exists()) configFile.getParentFile().mkdir();
             configFile.createNewFile();
             configLoad();
-            CommentedConfigurationNode rewards = config.getNode("rewards").setComment("xP// PokeDex coded by Xenoyia! Check out mc.xpgaming.com!");
+            CommentedConfigurationNode rewards = config.getNode("rewards").setComment("PokeDex Rewards by Xenoyia!");
             ItemStack reward10 = ItemStack.builder()
                     .itemType(Type("pixelmon:tm114"))
                     .quantity(1)
