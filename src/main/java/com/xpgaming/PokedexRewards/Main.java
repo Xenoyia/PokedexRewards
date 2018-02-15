@@ -1,4 +1,4 @@
-package com.xpgaming.xPPokeDex;
+package com.xpgaming.PokedexRewards;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
@@ -11,7 +11,6 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
@@ -31,8 +30,8 @@ public class Main {
     public static Main getInstance() {
         return instance;
     }
-    public static final String id = "xppokedex";
-    public static final String name = "xP// PokeDex";
+    public static final String id = "pokedexrewards";
+    public static final String name = "Pokedex Rewards";
     private static final Logger log = LoggerFactory.getLogger(name);
 
     private static EconomyService economyService;
@@ -58,44 +57,44 @@ public class Main {
 
     CommandSpec claim = CommandSpec.builder()
             .description(Text.of("Claim PokeDex rewards!"))
-            .permission("xpgaming.pokedex.base.claim")
+            .permission("pdrewards.base.claim")
             .executor(new Claim())
             .build();
 
     CommandSpec remaining = CommandSpec.builder()
             .description(Text.of("List Pokémon left to catch!"))
-            .permission("xpgaming.pokedex.base.remaining")
+            .permission("pdrewards.base.remaining")
             .executor(new Remaining())
             .build();
 
     CommandSpec count = CommandSpec.builder()
             .description(Text.of("Count number of Pokémon caught!"))
-            .permission("xpgaming.pokedex.base.count")
+            .permission("pdrewards.base.count")
             .executor(new Count())
             .build();
 
     CommandSpec reload = CommandSpec.builder()
             .description(Text.of("Reload the config!"))
-            .permission("xpgaming.pokedex.admin.reload")
+            .permission("pdrewards.admin.reload")
             .executor(new Reload())
             .build();
 
     CommandSpec getshinytoken = CommandSpec.builder()
             .description(Text.of("Get a shiny token!"))
-            .permission("xpgaming.pokedex.admin.gst")
+            .permission("pdrewards.admin.gst")
             .executor(new GetShinyToken())
             .build();
 
     CommandSpec convert = CommandSpec.builder()
             .description(Text.of("Convert <slot> into a shiny!"))
             .arguments(GenericArguments.onlyOne(GenericArguments.integer(Text.of("slot"))))
-            .permission("xpgaming.pokedex.base.convert")
+            .permission("pdrewards.base.convert")
             .executor(new Convert())
             .build();
 
     CommandSpec pokedex = CommandSpec.builder()
             .description(Text.of("PokéDex things!"))
-            .permission("xpgaming.pokedex.base")
+            .permission("pdrewards.base")
             .child(claim, "cl", "claim")
             .child(count, "c", "count", "co")
             .child(convert, "con", "convert", "conv")
@@ -105,13 +104,13 @@ public class Main {
 
     CommandSpec pokedexAdmin = CommandSpec.builder()
             .description(Text.of("PokéDex admin things!"))
-            .permission("xpgaming.pokedex.admin")
+            .permission("pdrewards.admin")
             .child(reload, "rl", "reload")
             .child(getshinytoken, "gst", "gettoken", "getshinytoken")
             .executor(new PokedexAdmin())
             .build();
 
-    String path = "config"+File.separator+"xPPokeDex";
+    String path = "config"+File.separator+"PokedexRewards";
 
     File configFile  = new File(path,"config.conf");
     ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder().setFile(configFile).build();
@@ -122,17 +121,8 @@ public class Main {
     public void onGameInitialization(GameInitializationEvent event) {
         Config.getInstance().setup(configFile, configLoader);
         UserData.getInstance().setup(dataFile, dataLoader);
-        consoleMsg("§b       _____   ____   _____                 _             ");
-        consoleMsg("§b      |  __ \\ / / /  / ____|               (_)            ");
-        consoleMsg("§b __  _| |__) / / /  | |  __  __ _ _ __ ___  _ _ __   __ _ ");
-        consoleMsg("§b \\ \\/ |  ___/ / /   | | |_ |/ _` | '_ ` _ \\| | '_ \\ / _` |");
-        consoleMsg("§b  >  <| |  / / /    | |__| | (_| | | | | | | | | | | (_| |");
-        consoleMsg("§b /_/\\_|_| /_/_/      \\_____|\\__,_|_| |_| |_|_|_| |_|\\__, |");
-        consoleMsg("§b                                                     __/ |");
-        consoleMsg("§b                                                    |___/ ");
-        consoleMsg("");
-        consoleMsg("§f[§6xP//§f] §ePokeDex - Loaded v0.7!");
-        consoleMsg("§f[§6xP//§f] §eBy Xenoyia with help from MageFX and XpanD!");
+        consoleMsg("§f[§6PokeDex§f] §ePokeDex Rewards - Loaded v0.7!");
+        consoleMsg("§f[§6PokeDex§f] §eBy Xenoyia with help from MageFX and XpanD!");
         Sponge.getCommandManager().register(this, pokedex, "pokedex", "pd", "dex");
         Sponge.getCommandManager().register(this, pokedexAdmin, "pokedexadmin", "pda", "dexadmin");
         Sponge.getServiceManager().provide(EconomyService.class);

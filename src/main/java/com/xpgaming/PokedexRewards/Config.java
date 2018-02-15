@@ -1,4 +1,4 @@
-package com.xpgaming.xPPokeDex;
+package com.xpgaming.PokedexRewards;
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -21,7 +21,7 @@ public class Config {
     }
     private CommentedConfigurationNode config;
     @Inject @ConfigDir(sharedRoot = false) private File configDir;
-    String path = "config"+File.separator+"xPPokeDex";
+    String path = "config"+File.separator+"PokedexRewards";
     private File configFile = new File(path, "config.conf");
     private ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder().setFile(configFile).build();
 

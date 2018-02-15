@@ -1,4 +1,4 @@
-package com.xpgaming.xPPokeDex;
+package com.xpgaming.PokedexRewards;
 
 import com.pixelmonmod.pixelmon.enums.EnumPokemon;
 import com.pixelmonmod.pixelmon.pokedex.Pokedex;

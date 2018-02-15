@@ -1,4 +1,4 @@
-package com.xpgaming.xPPokeDex;
+package com.xpgaming.PokedexRewards;
 
 import com.google.common.reflect.TypeToken;
 import net.minecraft.entity.player.EntityPlayerMP;

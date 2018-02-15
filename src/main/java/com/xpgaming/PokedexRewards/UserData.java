@@ -1,4 +1,4 @@
-package com.xpgaming.xPPokeDex;
+package com.xpgaming.PokedexRewards;
 
 import com.google.inject.Inject;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -19,7 +19,7 @@ public class UserData {
 
     private CommentedConfigurationNode data;
     @Inject @ConfigDir(sharedRoot = false) private File configDir;
-    String path = "config"+File.separator+"xPPokeDex";
+    String path = "config"+File.separator+"PokedexRewards";
     private File dataFile = new File(path, "data.conf");
     private ConfigurationLoader<CommentedConfigurationNode> dataLoader = HoconConfigurationLoader.builder().setFile(dataFile).build();
 
